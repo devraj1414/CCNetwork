@@ -12,9 +12,9 @@ enum NetworkError : Error{
     case decodingError
 }
 public struct Employee{
-    let name : String
-    let address : String
-    let age : Int
+   public let name : String
+   public let address : String
+   public let age : Int
 }
 
 public class WebService{
