@@ -18,7 +18,7 @@ public struct Employee{
 }
 
 public class WebService{
-    
+    public init() {}
     public func getEmployees()->[Employee]{
         return ([Employee(name: "Apple", address: "India Inc Ltd", age: 32),
         Employee(name: "Samsung", address: "San Fransisco, SFO, California", age: 44),
