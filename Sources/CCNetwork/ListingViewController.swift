@@ -9,6 +9,7 @@ import UIKit
 
 public class ListingViewController: UIViewController {
 
+    public static let storyboardVC = UIStoryboard(name: "List", bundle: Bundle.module).instantiateInitialViewController()!
     public override func viewDidLoad() {
         super.viewDidLoad()
 
