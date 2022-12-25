@@ -11,7 +11,7 @@ enum NetworkError : Error{
     case badRequest
     case decodingError
 }
-public struct Employee{
+public struct Employee: Codable{
    public let name : String
    public let address : String
    public let age : Int
@@ -25,8 +25,19 @@ public class WebService{
         Employee(name: "Googe", address: "District of Colombia, WTC", age: 22)])
     }
     
+    func fetchData<T:Codable>(url : URL, parse : @escaping(Data) ->T, completion : @escaping(Result<T?, NetworkError>)->()){
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil, (response as? HTTPURLResponse)?.statusCode == 200 else{
+                completion(.failure(.badRequest))
+                return
+            }
+            let result = parse(data)
+            completion(.success(result))
+        }.resume()
+    }
+    
 //    func fetchClientData(url : URL, parse: @escaping (Data) -> T?, completion : @escaping (Result<T?, NetworkError>)){
-//        let url  = "https://dummy.restapiexample.com/api/v1/employees"
+//        
 //
 //        URLSession.shared.dataTask(with: url) { d, r, e in
 //
