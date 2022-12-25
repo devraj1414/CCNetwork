@@ -6,6 +6,13 @@
 //
 
 import Foundation
+public struct EmployeeResult : Codable{
+    let status : String
+    let data : [EmployeeData]
+}
+public struct EmployeeData : Codable{
+    let employee_name : String
+}
 
 public class EmployeeViewModel{
     
@@ -14,7 +21,7 @@ public class EmployeeViewModel{
     }
     
     public let webServcie = WebService()
-    func fetchEmployeeData(){
+    public func fetchEmployeeData(){
         let url  = "https://dummy.restapiexample.com/api/v1/employees"
         webServcie.fetchData(url: URL(string: url)!) { data in
             return try! JSONDecoder().decode([Employee].self, from: data)
