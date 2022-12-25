@@ -21,18 +21,19 @@ public class EmployeeViewModel{
     }
     
     public let webServcie = WebService()
-    public func fetchEmployeeData(){
+    public func fetchEmployeeData(completion : @escaping ([EmployeeData]?) ->()) {
         let url  = "https://dummy.restapiexample.com/api/v1/employees"
         webServcie.fetchData(url: URL(string: url)!) { data in
             return try! JSONDecoder().decode(EmployeeResult.self, from: data)
         } completion: { result in
             switch result{
             case .success(let employee):
-                print(employee?.data)
+                if let empDat = employee?.data{
+                   completion(empDat)
+                }
             case .failure(let error):
-                print(error)
+                completion([])
             }
         }
-
     }
 }
