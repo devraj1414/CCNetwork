@@ -24,11 +24,11 @@ public class EmployeeViewModel{
     public func fetchEmployeeData(){
         let url  = "https://dummy.restapiexample.com/api/v1/employees"
         webServcie.fetchData(url: URL(string: url)!) { data in
-            return try! JSONDecoder().decode([Employee].self, from: data)
+            return try! JSONDecoder().decode(EmployeeResult.self, from: data)
         } completion: { result in
             switch result{
             case .success(let employee):
-                print(employee)
+                print(employee?.data)
             case .failure(let error):
                 print(error)
             }
