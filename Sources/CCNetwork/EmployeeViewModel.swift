@@ -11,13 +11,12 @@ public struct EmployeeResult : Codable{
     let data : [EmployeeData]
 }
 public struct EmployeeData : Codable{
-    let employee_name : String
+    public let employee_name : String
+    public let employee_salary : Int
 }
 
 public class EmployeeViewModel{
-    
     public init() {
-        
     }
     
     public let webServcie = WebService()
